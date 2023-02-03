@@ -1,10 +1,39 @@
 {
-  "name": "@thundernetworkrad/template-npm-packages",
-  "version": "0.0.1",
-  "description": "A Public Template for npm",
-  "main": "index.js",
-  "repository": "https://github.com/ThunderNetworkRaD/template-npm-packages",
-  "author": "ThunderNetworkRaD | Killer Boss Original",
+  "name": "node-cout",
+  "version": "2023.02.03",
+  "description": "Standard output module for JavaScript / TypeScript",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "install": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThunderNetworkRaD/node-cout.git"
+  },
+  "keywords": [
+    "std",
+    "standard",
+    "npmjs",
+    "npm",
+    "module",
+    "javascript",
+    "typescript",
+    "input",
+    "cout",
+    "await"
+  ],
+  "author": "Thunder Network RaD | Killer Boss Original",
   "license": "Mozilla Public License 2.0",
-  "private": false
+  "bugs": {
+    "url": "https://github.com/ThunderNetworkRaD/node-cout/issues"
+  },
+  "homepage": "https://github.com/ThunderNetworkRaD/node-cout#readme",
+  "dependencies": {
+    "@thundernetworkrad/logs": "^2023.2.3-1",
+    "@thundernetworkrad/time": "^2023.2.3",
+    "@types/node": "^18.11.18",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.4"
+  }
 }
