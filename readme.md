@@ -2,14 +2,15 @@
 
 This module allow you to make COUT and Debugs in NodeJS
 
-Readme work in progress
 
 ```js
-import { createCout } from '@thundernetworkrad/std';
+import { cout } from '@thundernetworkrad/std';
 
-let ccout = new createCout(0, true); // debugLevel, logs enabled (file) (like using log() )
+cout = new cout(0, true, true); // debugLevel, logs enabled (file), emojis enabled
 
-let cout = ccout.cout;
-
-cout('test', 0) // console.log day, time and the string, if the number is >= to the debugLevel
+cout.debug('test', 0) // console.log time and the string, if the number is >= to the debugLevel
+cout.log('test')
+cout.error('test')
+cout.warn('test')
+cout.info('test')
 ```

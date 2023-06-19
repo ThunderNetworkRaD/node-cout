@@ -1,36 +1,95 @@
-let debug: number, logs1: boolean|undefined|null;
 import { getTime } from '@thundernetworkrad/time';
 import { log } from '@thundernetworkrad/logs';
+import chalk from "chalk";
 
-export class createCout {
-    /**
-     * @constructor
-     * @param debugLevel from what debug level you want to log?
-     * @param logs do you want files log?
-     */
-    constructor (debugLevel: number, logs?: boolean) {
-        if (!debugLevel) debugLevel = 0;
-        if (!logs) logs = false;
-        debug = debugLevel;
-        logs1 = logs;
-    }
+export class cout {
+    private debugLevel: number
+    private file: boolean
+    private emoji: boolean
 
     /**
      * 
-     * @param string what to log?
-     * @param debugLevel from what debug level this will logged?
-     * @returns 
+     * @param debugLevel The debug level of the logging
+     * @param file Do you want put the logs in a file?
+     * @param emoji Do you want put the logs in an emoji?
      */
-    cout (string: string, debugLevel?: number) {
-        if (!debugLevel) debugLevel = 0;
-        var time = getTime();
+    constructor(debugLevel?: number, file?: boolean, emoji?: boolean) {
+        this.debugLevel = debugLevel || 0;
+        this.file = file || false;
+        this.emoji = emoji || false;
+    }
 
-        if (debug >= debugLevel) {
-            console.log(`[${time.year}.${time.month}.${time.day}-${time.hours}:${time.minutes}:${time.seconds}] | ${String(string)}`);
-            if (logs1) {
-                log(`[${time.year}.${time.month}.${time.day}-${time.hours}:${time.minutes}:${time.seconds}] | ${String(string)}`);
-            }
+    private l(string: string, type: string) {
+        let time = `${getTime().hours}:${getTime().minutes}:${getTime().seconds}`;
+        type = type.toUpperCase();
+
+        let timec = chalk.blue(time), stringc: string = " ", typec: string, emoji: string, emojic: string;
+
+        switch (type) {
+            case "DEBUG":
+                stringc = chalk.grey(string);
+                typec = chalk.grey(type);
+                emoji = "📝";
+                emojic = "📝 ";
+                break;
+            case "LOG":
+                stringc = chalk.white(string);
+                type = "  " + type;
+                typec = chalk.white(type);
+                emoji = "🪵";
+                emojic = "🪵  ";
+                break;
+            case "INFO":
+                stringc = chalk.cyan(string);
+                type = " " + type;
+                typec = chalk.cyan(type);
+                emoji = " ℹ️ ";
+                emojic = " ℹ️ ";
+                break;
+            case "WARN":
+                stringc = chalk.yellow(string);
+                type = " " + type;
+                typec = chalk.yellow(type);
+                emoji = "⚠️";
+                emojic = "⚠️  ";
+                break;
+            case "ERROR":
+                stringc = chalk.red(string);
+                typec = chalk.red(type);
+                emoji = "❌";
+                emojic = "❌ ";
+                break;
         }
-        return;
-    };
+        if (this.file) {
+            string.split("\n").forEach((line) => {
+                log(`${this.emoji ? emoji : ""}[${time} ${type}] | ${line}`);
+            })
+        }
+
+        stringc.split("\n").forEach((line) => {
+            console.log(`${this.emoji ? emojic : ""}[${timec} ${typec}] | ${line}`);
+        })
+    }
+
+    debug(string: string, level?: number) {
+        if (this.debugLevel >= (level || 0)) {
+            this.l(string, "DEBUG")
+        }
+    }
+
+    log(string: string) {
+        this.l(string, "LOG");
+    }
+
+    info(string: string) {
+        this.l(string, "INFO");
+    }
+
+    warn(string: string) {
+        this.l(string, "WARN");
+    }
+
+    error(string: string) {
+        this.l(string, "ERROR");
+    }
 }
