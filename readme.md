@@ -2,9 +2,9 @@
 
 This module allow you to make COUT and Debugs in NodeJS
 
-
+## MJS or TypeScript
 ```js
-import { cout } from '@thundernetworkrad/std';
+import { cout } from 'node-cout';
 
 cout = new cout(0, true, true); // debugLevel, logs enabled (file), emojis enabled
 
@@ -13,4 +13,10 @@ cout.log('test')
 cout.error('test')
 cout.warn('test')
 cout.info('test')
+```
+
+## CJS
+use `await import("")`
+```js
+let { cout } = await import('node-cout');
 ```
