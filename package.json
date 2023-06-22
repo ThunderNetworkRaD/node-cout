@@ -1,6 +1,6 @@
 {
   "name": "node-cout",
-  "version": "2023.06.19-1",
+  "version": "2023.06.22",
   "description": "Standard output module for JavaScript / TypeScript",
   "main": "build/index.js",
   "types": "build/index.d.ts",

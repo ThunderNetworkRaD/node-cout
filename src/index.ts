@@ -23,6 +23,10 @@ export class cout {
         let time = `${getTime().hours}:${getTime().minutes}:${getTime().seconds}`;
         type = type.toUpperCase();
 
+        if (getTime().hours < 10) time += " ";
+        if (getTime().minutes < 10) time += " ";
+        if (getTime().seconds < 10) time += " ";
+
         let timec = chalk.blue(time), stringc: string = " ", typec: string, emoji: string, emojic: string;
 
         switch (type) {
@@ -43,8 +47,8 @@ export class cout {
                 stringc = chalk.cyan(string);
                 type = " " + type;
                 typec = chalk.cyan(type);
-                emoji = " ℹ️ ";
-                emojic = " ℹ️ ";
+                emoji = "ℹ️ ";
+                emojic = "ℹ️ ";
                 break;
             case "WARN":
                 stringc = chalk.yellow(string);
