@@ -23,6 +23,9 @@ const cout = new default(); // from here equal to MJS example
 ```
 
 ## Changelogs
+### 2023.07.08-1
+- Fix info Emoji
+
 ### v2023.07.08
 - Exported the main class as default
 - Add Stringify to all functions
