@@ -41,7 +41,7 @@ export default class cout {
                 type = "  " + type;
                 typec = chalk.white(type);
                 emoji = "🪵";
-                emojic = "🪵  ";
+                emojic = "🪵 ";
                 break;
             case "INFO":
                 stringc = chalk.cyan(string);
