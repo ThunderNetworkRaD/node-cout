@@ -2,7 +2,7 @@ import { getTime } from '@thundernetworkrad/time';
 import { log } from '@thundernetworkrad/logs';
 import chalk from "chalk";
 
-export class cout {
+export default class cout {
     private debugLevel: number
     private file: boolean
     private emoji: boolean
