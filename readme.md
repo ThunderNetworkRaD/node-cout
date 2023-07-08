@@ -23,6 +23,9 @@ const cout = new default(); // from here equal to MJS example
 ```
 
 ## Changelogs
+### 2023.07.08-2
+- Fix emoji for Debug
+
 ### 2023.07.08-1
 - Fix info Emoji
 
