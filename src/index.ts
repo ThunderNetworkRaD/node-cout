@@ -75,25 +75,25 @@ export class cout {
         })
     }
 
-    debug(string: string, level?: number) {
+    debug(string: any, level?: number) {
         if (this.debugLevel >= (level || 0)) {
-            this.l(string, "DEBUG")
+            this.l(String(string), "DEBUG")
         }
     }
 
-    log(string: string) {
-        this.l(string, "LOG");
+    log(string: any) {
+        this.l(String(string), "LOG");
     }
 
-    info(string: string) {
-        this.l(string, "INFO");
+    info(string: any) {
+        this.l(String(string), "INFO");
     }
 
-    warn(string: string) {
-        this.l(string, "WARN");
+    warn(string: any) {
+        this.l(String(string), "WARN");
     }
 
-    error(string: string) {
-        this.l(string, "ERROR");
+    error(string: any) {
+        this.l(String(string), "ERROR");
     }
 }
