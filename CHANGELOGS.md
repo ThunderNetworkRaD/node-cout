@@ -8,8 +8,9 @@ Here are the changelogs since the first package version.
 - Now debugLevel is required and no more optional  
 - Added types, to choose which debug message should be logged or not  
 - Cleaned up some code  
-- Restyled README.md  
-- Repository moved to [Thunder Network Source](https://source.thundernetwork.org/ThunderNetworkRaD/node-cout)
+- Restyled README.md (also added Troubleshooting section)  
+- Repository moved to [Thunder Network Source](https://source.thundernetwork.org/ThunderNetworkRaD/node-cout)  
+- Fixed `tsc` build script in `package.json`  
 
 ## 2023.07.08-2  
 
