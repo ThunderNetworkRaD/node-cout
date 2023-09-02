@@ -1,99 +1,115 @@
-import { getTime } from '@thundernetworkrad/time';
-import { log } from '@thundernetworkrad/logs';
+import { getTime } from "@thundernetworkrad/time";
+import { log } from "@thundernetworkrad/logs";
 import chalk from "chalk";
 
 export default class cout {
-    private debugLevel: number
-    private file: boolean
-    private emoji: boolean
+	private debugLevel: number
+	private save: boolean
+	private emoji: boolean
+	private types: string[]
 
-    /**
-     * 
-     * @param debugLevel The debug level of the logging
-     * @param file Do you want put the logs in a file?
-     * @param emoji Do you want put the logs in an emoji?
-     */
-    constructor(debugLevel?: number, file?: boolean, emoji?: boolean) {
-        this.debugLevel = debugLevel || 0;
-        this.file = file || false;
-        this.emoji = emoji || false;
-    }
+	/**
+	 * 
+	 * @param debugLevel The maximum debug level preferred
+	 * @param options.save Whetever logs are saved in a file or not
+	 * @param options.emoji If logs are followed by an emoji
+	 * @param options.types Types of logs that are allowed to appear
+	 * 
+	 */
+	constructor(debugLevel: number, options?: { save?: boolean, emoji?: boolean, types?: string[] }) {
+		const { save, emoji, types } = options || {};
+		this.debugLevel = debugLevel || 0;
+		this.save = save || false;
+		this.emoji = emoji || false;
+		this.types = types || [];
+	}
 
-    private l(string: string, type: string) {
-        let time = `${getTime().hours}:${getTime().minutes}:${getTime().seconds}`;
-        type = type.toUpperCase();
+	private l(string: string, type: string) {
+		let time = `${getTime().hours}:${getTime().minutes}:${getTime().seconds}`;
+		type = type.toUpperCase();
 
-        if (getTime().hours < 10) time += " ";
-        if (getTime().minutes < 10) time += " ";
-        if (getTime().seconds < 10) time += " ";
+		if (getTime().hours < 10) time += " ";
+		if (getTime().minutes < 10) time += " ";
+		if (getTime().seconds < 10) time += " ";
 
-        let timec = chalk.blue(time), stringc: string = " ", typec: string, emoji: string, emojic: string;
+		let timec = chalk.blue(time), stringc: string = " ", typec: string, emoji: string, emojic: string;
 
-        switch (type) {
-            case "DEBUG":
-                stringc = chalk.grey(string);
-                typec = chalk.grey(type);
-                emoji = "📝";
-                emojic = "📝 ";
-                break;
-            case "LOG":
-                stringc = chalk.white(string);
-                type = "  " + type;
-                typec = chalk.white(type);
-                emoji = "🪵";
-                emojic = "🪵 ";
-                break;
-            case "INFO":
-                stringc = chalk.cyan(string);
-                type = " " + type;
-                typec = chalk.cyan(type);
-                emoji = "ℹ️ ";
-                emojic = "ℹ️  ";
-                break;
-            case "WARN":
-                stringc = chalk.yellow(string);
-                type = " " + type;
-                typec = chalk.yellow(type);
-                emoji = "⚠️";
-                emojic = "⚠️  ";
-                break;
-            case "ERROR":
-                stringc = chalk.red(string);
-                typec = chalk.red(type);
-                emoji = "❌";
-                emojic = "❌ ";
-                break;
-        }
-        if (this.file) {
-            string.split("\n").forEach((line) => {
-                log(`${this.emoji ? emoji : ""}[${time} ${type}] | ${line}`);
-            })
-        }
+		switch (type) {
+			case "DEBUG":
+				stringc = chalk.grey(string);
+				typec = chalk.grey(type);
+				emoji = "📝";
+				emojic = "📝 ";
+				break;
+			case "LOG":
+				stringc = chalk.white(string);
+				type = "  " + type;
+				typec = chalk.white(type);
+				emoji = "🪵";
+				emojic = "🪵 ";
+				break;
+			case "INFO":
+				stringc = chalk.cyan(string);
+				type = " " + type;
+				typec = chalk.cyan(type);
+				emoji = "ℹ️ ";
+				emojic = "ℹ️  ";
+				break;
+			case "WARN":
+				stringc = chalk.yellow(string);
+				type = " " + type;
+				typec = chalk.yellow(type);
+				emoji = "⚠️";
+				emojic = "⚠️  ";
+				break;
+			case "ERROR":
+				stringc = chalk.red(string);
+				typec = chalk.red(type);
+				emoji = "❌";
+				emojic = "❌ ";
+				break;
+		}
+		if (this.save) {
+			string.split("\n").forEach((line) => {
+				log(`${this.emoji ? emoji : ""}[${time} ${type}] | ${line}`);
+			})
+		}
 
-        stringc.split("\n").forEach((line) => {
-            console.log(`${this.emoji ? emojic : ""}[${timec} ${typec}] | ${line}`);
-        })
-    }
+		stringc.split("\n").forEach((line) => {
+			console.log(`${this.emoji ? emojic : ""}[${timec} ${typec}] | ${line}`);
+		})
+	}
 
-    debug(string: any, level?: number) {
-        if (this.debugLevel >= (level || 0)) {
-            this.l(String(string), "DEBUG")
-        }
-    }
+	private checkTypes(types: string | string[]) {
+		if (!Array.isArray(types)) types = [types];
+		return types.some((type) => this.types.includes(type));
 
-    log(string: any) {
-        this.l(String(string), "LOG");
-    }
+	}
 
-    info(string: any) {
-        this.l(String(string), "INFO");
-    }
+	debug(string: any, level: number, types?: string | string[]) {
+		if ((level || 0) <= this.debugLevel) {
+			if (types && !this.checkTypes(types)) return;
+			this.l(String(string), "DEBUG");
+		}
+	}
 
-    warn(string: any) {
-        this.l(String(string), "WARN");
-    }
+	log(string: any, types?: string | string[]) {
+		if (types && !this.checkTypes(types)) return;
+		this.l(String(string), "LOG");
+	}
 
-    error(string: any) {
-        this.l(String(string), "ERROR");
-    }
+	info(string: any, types?: string | string[]) {
+		if (types && !this.checkTypes(types)) return;
+		this.l(String(string), "INFO");
+	}
+
+	warn(string: any, types?: string | string[]) {
+		if (types && !this.checkTypes(types)) return;
+		this.l(String(string), "WARN");
+	}
+
+	error(string: any, types?: string | string[]) {
+		if (types && !this.checkTypes(types)) return;
+		this.l(String(string), "ERROR");
+	}
 }

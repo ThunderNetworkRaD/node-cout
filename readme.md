@@ -1,35 +1,57 @@
-# COUT
+# COUT  
 
-This module allow you to make COUT and Debugs in NodeJS
+This package allows you to use `cout` and debug levels in Node.js.  
 
-## MJS or TypeScript
-```js
-import cc from 'node-cout';
+## Installation  
 
-const cout = new cc(0, true, true); // debugLevel, logs enabled (file), emojis enabled
+Run this in your project folder:  
 
-cout.debug('test', 0) // console.log time and the string, if the number is >= to the debugLevel
-cout.log('test')
-cout.error('test')
-cout.warn('test')
-cout.info('test')
+```bash
+npm install node-cout
 ```
 
-## CJS
-use `await import("")`
+## Usage  
+
+Learn how to use `node-cout` here:  
+
+### Import  
+
 ```js
-const { default } = await import('node-cout'); // ti put in an async function
-const cout = new default(); // from here equal to MJS example
+const cc = require('node-cout'); // CommonJS
+
+import cc from 'node-cout'; // MJS or TypeScript
+
+const cout = new cc(1, { save: true, emoji: true, types: ['loading', 'uploading'] });
 ```
 
-## Changelogs
-### 2023.07.08-2
-- Fix emoji for Debug
+> Parameters:  
+> ```
+> debugLevel: number
+> options?: {
+>   save?: boolean
+>   emoji?: boolean
+>   types?: string[]
+> }
+> ```
 
-### 2023.07.08-1
-- Fix info Emoji
+### Logging  
 
-### v2023.07.08
-- Exported the main class as default
-- Add Stringify to all functions
-- Changed the string type in the function to "any"
+```js
+cout.debug('Hello World', 1); // Sends a debug log (1 is debug level, if its higher than the one defined in the constructor, its not going to be logged.)
+
+cout.info('Hello World'); // Sends an info log
+
+cout.warn('Hello World'); // Sends a warning log
+
+cout.error('Hello World'); // Sends an error log
+
+cout.log('Hello World'); // Sends a normal log
+```
+
+If you want to use the `types` option, you can do it like this:  
+
+```js
+cout.debug('Hello World', 1, types);
+```
+
+`types` can either be a string or an array of strings, and if one of them matches with one of the types defined in the constructor, the log is going to be logged.  

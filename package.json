@@ -1,6 +1,6 @@
 {
   "name": "node-cout",
-  "version": "2023.07.08-2",
+  "version": "2023.09.02",
   "description": "Standard output module for JavaScript / TypeScript",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThunderNetworkRaD/node-cout.git"
+    "url": "git+https://source.thundernetwork.org/ThunderNetworkRaD/node-cout.git"
   },
   "keywords": [
     "std",
@@ -22,14 +22,15 @@
     "typescript",
     "input",
     "cout",
-    "await"
+    "await",
+    "log"
   ],
   "author": "Thunder Network RaD | Killer Boss Original",
   "license": "Mozilla Public License 2.0",
   "bugs": {
-    "url": "https://github.com/ThunderNetworkRaD/node-cout/issues"
+    "url": "https://source.thundernetwork.org/ThunderNetworkRaD/node-cout/issues"
   },
-  "homepage": "https://github.com/ThunderNetworkRaD/node-cout#readme",
+  "homepage": "https://source.thundernetwork.org/ThunderNetworkRaD/node-cout#readme",
   "dependencies": {
     "@thundernetworkrad/logs": "^2023.2.5-1",
     "@thundernetworkrad/time": "^2023.2.5-2",
