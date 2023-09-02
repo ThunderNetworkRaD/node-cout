@@ -1,4 +1,4 @@
-# COUT  
+# node-cout  
 
 This package allows you to use `cout` and debug levels in Node.js.  
 
@@ -17,12 +17,12 @@ Learn how to use `node-cout` here:
 ### Import  
 
 ```js
-const cc = require('node-cout'); // CommonJS
-
-import cc from 'node-cout'; // MJS or TypeScript
+import cc from 'node-cout';
 
 const cout = new cc(1, { save: true, emoji: true, types: ['loading', 'uploading'] });
 ```
+
+> You're using CommonJS and can use `require()` instead of `import`? Go on [troubleshooting](#troubleshooting).
 
 > Parameters:  
 > ```
@@ -55,3 +55,19 @@ cout.debug('Hello World', 1, types);
 ```
 
 `types` can either be a string or an array of strings, and if one of them matches with one of the types defined in the constructor, the log is going to be logged.  
+
+# Troubleshooting  
+
+Unfortunately, this is not supported anymore:  
+
+```js
+const cc = require('node-cout');
+```
+
+If you want to `import` the package in your CommonJS project, add this to your `package.json` file:
+
+```json
+{
+  "type": "module"
+}
+```
