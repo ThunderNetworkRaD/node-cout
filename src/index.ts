@@ -71,12 +71,12 @@ export default class cout {
 		}
 		if (this.save) {
 			string.split("\n").forEach((line) => {
-				log(`${emoji}[${time} ${type}] | ${line}`);
+				log(`${this.emoji ? emoji : ''}[${time} ${type}] | ${line}`);
 			})
 		}
 
 		stringc.split("\n").forEach((line) => {
-			console.log(`${emojic}[${timec} ${typec}] | ${line}`);
+			console.log(`${this.emoji ? emojic : ''}[${timec} ${typec}] | ${line}`);
 		})
 	}
 
